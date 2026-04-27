@@ -1,0 +1,12 @@
+E:\nam3_hk1\PTTKTT\DynamicPrograming\x64\Debug\WebView2Loader.dll
+E:\nam3_hk1\PTTKTT\DynamicPrograming\x64\Debug\Microsoft.Web.WebView2.Core.dll
+E:\nam3_hk1\PTTKTT\DynamicPrograming\x64\Debug\Microsoft.Web.WebView2.WinForms.dll
+E:\nam3_hk1\PTTKTT\DynamicPrograming\x64\Debug\Microsoft.Web.WebView2.Core.xml
+E:\nam3_hk1\PTTKTT\DynamicPrograming\x64\Debug\Microsoft.Web.WebView2.WinForms.xml
+E:\nam3_hk1\PTTKTT\DynamicPrograming\TSP_Dyna.9954D2CD\x64\Debug\TSP_DynamicPrograming_Algorithm.vcxproj.AssemblyReference.cache
+E:\nam3_hk1\PTTKTT\DynamicPrograming\TSP_Dyna.9954D2CD\x64\Debug\Nhom13BaoCaoHocPhan.Dynamic_Programming.resources
+E:\nam3_hk1\PTTKTT\DynamicPrograming\TSP_Dyna.9954D2CD\x64\Debug\Nhom13BaoCaoHocPhan.Greedy.resources
+E:\nam3_hk1\PTTKTT\DynamicPrograming\TSP_Dyna.9954D2CD\x64\Debug\Nhom13BaoCaoHocPhan.Karatsuba.resources
+E:\nam3_hk1\PTTKTT\DynamicPrograming\TSP_Dyna.9954D2CD\x64\Debug\Nhom13BaoCaoHocPhan.MENU.resources
+E:\nam3_hk1\PTTKTT\DynamicPrograming\TSP_Dyna.9954D2CD\x64\Debug\TSP_DynamicPrograming_Algorithm.vcxproj.GenerateResource.cache
+E:\nam3_hk1\PTTKTT\DynamicPrograming\TSP_Dyna.9954D2CD\x64\Debug\TSP_Dyna.24E0CD04.Up2Date

@@ -1,0 +1,68 @@
+﻿C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(538,5): warning MSB8028: The intermediate directory (TSP_Dyna.9954D2CD\x64\Debug\) contains files shared from another project (TSP_DynamicPrograming.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Dynamic_Programming.cpp
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Karatsuba.h(331,9): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'Dynamic_Programming.cpp')
+  
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Dynamic_Programming.cpp(90,13): warning C4244: 'initializing': conversion from '__int64' to 'double', possible loss of data
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Dynamic_Programming.cpp(91,13): warning C4244: 'initializing': conversion from '__int64' to 'double', possible loss of data
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Dynamic_Programming.cpp(284,8): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Dynamic_Programming.cpp(464,22): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Dynamic_Programming.cpp(628,21): warning C4566: character represented by universal-character-name '\u1ED7' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Dynamic_Programming.cpp(720,8): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Dynamic_Programming.cpp(760,8): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Dynamic_Programming.cpp(776,8): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Dynamic_Programming.cpp(785,19): warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+  Greedy.cpp
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(18,20): warning C4566: character represented by universal-character-name '\u00F2' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(18,20): warning C4566: character represented by universal-character-name '\u1EAD' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(18,20): warning C4566: character represented by universal-character-name '\u1EC3' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(18,20): warning C4566: character represented by universal-character-name '\u1EDB' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(18,20): warning C4566: character represented by universal-character-name '\u1EF1' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(44,44): warning C4965: implicit box of integer 0; use nullptr or explicit cast
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(207,35): warning C4566: character represented by universal-character-name '\u1EAF' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(207,35): warning C4566: character represented by universal-character-name '\u1EE7' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(207,35): warning C4566: character represented by universal-character-name '\u1EEF' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(207,35): warning C4566: character represented by universal-character-name '\u1EC7' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(214,35): warning C4566: character represented by universal-character-name '\u1EE3' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(214,35): warning C4566: character represented by universal-character-name '\u1EC7' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(227,35): warning C4566: character represented by universal-character-name '\u1ED1' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(227,35): warning C4566: character represented by universal-character-name '\u00F2' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(227,35): warning C4566: character represented by universal-character-name '\u1EEF' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(227,35): warning C4566: character represented by universal-character-name '\u1EC7' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(227,35): warning C4566: character represented by universal-character-name '\u1EC3' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(229,35): warning C4566: character represented by universal-character-name '\u1ED1' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(229,35): warning C4566: character represented by universal-character-name '\u00F2' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(229,35): warning C4566: character represented by universal-character-name '\u1EEF' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(229,35): warning C4566: character represented by universal-character-name '\u1EC7' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(229,35): warning C4566: character represented by universal-character-name '\u1EC1' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(229,35): warning C4566: character represented by universal-character-name '\u1EC3' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(237,39): warning C4566: character represented by universal-character-name '\u00F2' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(237,54): warning C4566: character represented by universal-character-name '\u1EBF' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(237,54): warning C4566: character represented by universal-character-name '\u1ED9' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(239,39): warning C4566: character represented by universal-character-name '\u00F2' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(239,54): warning C4566: character represented by universal-character-name '\u1ED9' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(250,43): warning C4566: character represented by universal-character-name '\u1ECB' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(250,43): warning C4566: character represented by universal-character-name '\u1EA3' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(250,43): warning C4566: character represented by universal-character-name '\u1ED1' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(250,43): warning C4566: character represented by universal-character-name '\u1EA1' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(250,43): warning C4566: character represented by universal-character-name '\u00F2' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(266,26): warning C4566: character represented by universal-character-name '\u1ED7' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(266,26): warning C4566: character represented by universal-character-name '\u1ECD' cannot be represented in the current code page (1258)
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Greedy.cpp(267,13): warning C4566: character represented by universal-character-name '\u1ED7' cannot be represented in the current code page (1258)
+  Karatsuba.cpp
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Karatsuba.h(331,9): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'Karatsuba.cpp')
+  
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Karatsuba.cpp(21,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Karatsuba.cpp(21,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Karatsuba.cpp(43,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Karatsuba.cpp(43,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Karatsuba.cpp(98,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  MENU.cpp
+E:\nam3_hk1\PTTKTT\DynamicPrograming\Karatsuba.h(331,9): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'MENU.cpp')
+  
+  .NETFramework,Version=v4.8.1.AssemblyAttributes.cpp
+  Generating Code...
+  Dynamic_Programming.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  Nhom13_BaoCaoHocPhan.vcxproj -> E:\nam3_hk1\PTTKTT\DynamicPrograming\x64\Debug\TSP_DynamicPrograming_Algorithm.exe

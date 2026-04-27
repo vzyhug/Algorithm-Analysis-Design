@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36603.0 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TSP_DynamicPrograming_Algorithm", "TSP_DynamicPrograming_Algorithm.vcxproj", "{9954D2CD-7DC6-4FDE-0BA4-FB82C34C5D02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9954D2CD-7DC6-4FDE-0BA4-FB82C34C5D02}.Debug|x64.ActiveCfg = Debug|x64
+		{9954D2CD-7DC6-4FDE-0BA4-FB82C34C5D02}.Debug|x64.Build.0 = Debug|x64
+		{9954D2CD-7DC6-4FDE-0BA4-FB82C34C5D02}.Debug|x86.ActiveCfg = Debug|Win32
+		{9954D2CD-7DC6-4FDE-0BA4-FB82C34C5D02}.Debug|x86.Build.0 = Debug|Win32
+		{9954D2CD-7DC6-4FDE-0BA4-FB82C34C5D02}.Release|x64.ActiveCfg = Release|x64
+		{9954D2CD-7DC6-4FDE-0BA4-FB82C34C5D02}.Release|x64.Build.0 = Release|x64
+		{9954D2CD-7DC6-4FDE-0BA4-FB82C34C5D02}.Release|x86.ActiveCfg = Release|Win32
+		{9954D2CD-7DC6-4FDE-0BA4-FB82C34C5D02}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {07B323FB-072A-42C7-A21F-FF529BE06FE5}
+	EndGlobalSection
+EndGlobal

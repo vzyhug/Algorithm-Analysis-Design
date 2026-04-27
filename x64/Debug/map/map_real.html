@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Real Path Map</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+    <style>
+        html, body { height:100%; margin:0; padding:0; }
+        #map { width:100%; height:100%; }
+    </style>
+</head>
+
+<body>
+<div id="map"></div>
+
+<script>
+
+    var map = L.map('map').setView([10.8065, 106.6286], 17);
+
+    L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        maxZoom: 20
+    }).addTo(map);
+
+    let markers = [];
+    let optimalEdges = [];
+    let allEdges = [];
+    let allRealRoutes = [];
+
+    var redIcon = L.icon({
+        iconUrl: "https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png",
+        iconSize: [32, 32],
+        iconAnchor: [16, 32]
+    });
+
+    async function drawRealSegment(lat1, lng1, lat2, lng2) {
+        let url = "https://router.project-osrm.org/route/v1/driving/"
+            + lng1 + "," + lat1 + ";"
+            + lng2 + "," + lat2
+            + "?overview=full&geometries=geojson";
+
+        const res = await fetch(url);
+        const json = await res.json();
+
+        if (!json.routes || !json.routes[0]) return null;
+
+        let coords = json.routes[0].geometry.coordinates;
+        let latlngs = coords.map(p => [p[1], p[0]]);
+        let distance = json.routes[0].distance;
+
+        return { line: latlngs, weight: distance };
+    }
+
+    async function drawAllRealRoutesBetweenAllMarkers() {
+
+        allRealRoutes.forEach(r => map.removeLayer(r));
+        allRealRoutes = [];
+
+        let n = markers.length;
+        if (n < 2) return;
+
+        for (let i = 0; i < n; i++) {
+            for (let j = i + 1; j < n; j++) {
+
+                let p1 = markers[i].getLatLng();
+                let p2 = markers[j].getLatLng();
+
+                let seg = await drawRealSegment(p1.lat, p1.lng, p2.lat, p2.lng);
+
+                if (seg) {
+                    let poly = L.polyline(seg.line, {
+                        color: "black",
+                        weight: 3,
+                        opacity: 0.85
+                    }).addTo(map);
+
+                    allRealRoutes.push(poly);
+
+                    window.chrome.webview.postMessage(
+                        "WEIGHT|" + markers[i].pointName + "|" + markers[j].pointName + "|" + seg.weight
+                    );
+                }
+            }
+        }
+    }
+
+    map.on("click", async function (e) {
+
+        let name = prompt("Nhập tên điểm:", "P" + (markers.length + 1));
+        if (!name) name = "P" + (markers.length + 1);
+
+        let marker = L.marker(e.latlng, { icon: redIcon }).addTo(map);
+        marker.pointName = name;
+
+        marker.bindTooltip(
+            name + "<br>Lat: " + e.latlng.lat.toFixed(6) + "<br>Lng: " + e.latlng.lng.toFixed(6),
+            { permanent: false }
+        );
+
+        markers.push(marker);
+
+        window.chrome.webview.postMessage(
+            "REALPOINT|" + name + "|" + e.latlng.lat + "|" + e.latlng.lng
+        );
+
+        await drawAllRealRoutesBetweenAllMarkers();
+
+        marker.on("click", async function () {
+            map.removeLayer(marker);
+            markers = markers.filter(m => m !== marker);
+
+            window.chrome.webview.postMessage("DELETE|" + name);
+
+            await drawAllRealRoutesBetweenAllMarkers();
+        });
+    });
+
+    function clearAll() {
+
+        markers.forEach(m => map.removeLayer(m));
+        markers = [];
+
+        allRealRoutes.forEach(r => map.removeLayer(r));
+        allRealRoutes = [];
+
+        optimalEdges.forEach(e => map.removeLayer(e));
+        optimalEdges = [];
+    }
+
+    var greenLayer = L.layerGroup().addTo(map);
+
+    function clearGreenRoute() {
+        greenLayer.clearLayers();
+    }
+
+    function drawOptimalLoopFromCpp(points) {
+
+        clearGreenRoute();
+
+        for (let i = 0; i < points.length - 1; i++) {
+
+            let A = points[i];
+            let B = points[i + 1];
+
+            let url =
+                `https://graphhopper.com/api/1/route?point=${A.lat},${A.lng}` +
+                `&point=${B.lat},${B.lng}` +
+                `&vehicle=car&locale=en&points_encoded=false` +   // ⭐ SỬA QUAN TRỌNG
+                `&key=a0676cbe-87a9-4ed7-b1e0-325b3cb1705b`;
+
+            fetch(url)
+                .then(r => r.json())
+                .then(json => {
+
+                    console.log("GH raw response:", json); // ⭐ debug
+
+                    if (!json.paths || json.paths.length === 0) {
+                        console.warn("⚠ No GH route:", json);
+                        return;
+                    }
+
+                    let path = json.paths[0];
+
+                    if (!path.points || !path.points.coordinates) {
+                        console.warn("⚠ GH missing coordinates:", json);
+                        return;
+                    }
+
+                    let coords = path.points.coordinates;
+
+                    if (!coords || coords.length === 0) {
+                        console.warn("⚠ GH empty coords:", json);
+                        return;
+                    }
+
+                    let latlngs = coords.map(c => [c[1], c[0]]);
+
+                    L.polyline(latlngs, {
+                        color: "green",
+                        weight: 4
+                    }).addTo(greenLayer);
+                })
+                .catch(err => console.error("GH ERROR:", err));
+        }
+    }
+
+
+
+
+</script>
+</body>
+</html>

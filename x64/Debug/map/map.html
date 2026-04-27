@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Leaflet Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="leaflet.css" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="leaflet.js"></script>
+<script>
+    // ====== Khởi tạo map tại Trường Đại Học Công Thương TP.HCM ======
+    var map = L.map('map').setView([10.807087, 106.628612], 17);
+
+    // MÃ NGUỒN MỞ MAP NÀY (BÊN DƯỚI) VI PHẠM CHỦ QUYỀN BIỂN ĐẢO VIỆT NAM !!!! - NÊN EM KHÔNG DÙNG VÀ NOTE LẠI ĐỂ NHẮC NHỞ MỌI NGƯỜI
+
+    /*L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map); TẢY CHAY MÃ NGUỒN TỪ SOURCE onstreetmap.org*/
+
+
+
+    // SỬ DỤNG GOOGLE MAPS THAY THẾ OPEN STREET MAP
+    // EM XIN PHÉP SỬ DỤNG TITLE MAP GOOGLE MAPS , EM CAM KẾT KHÔNG SỬ DỤNG CHO MỤC ĐÍCH THƯƠNG MẠI NÀO , CHỈ PHỤC VỤ HỌC TẬP VÀ NGHIÊN CỨU HỌC THUẬT
+    L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        attribution: '© Google Maps'
+    }).addTo(map);
+
+
+
+    // Icon dùng cho các marker
+    var startIcon = L.icon({
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+        iconSize: [38, 38],
+        iconAnchor: [19, 38],
+        popupAnchor: [0, -38]
+    });
+    // ===== DANH SÁCH MARKER & CÁC ĐƯỜNG NỐI =====
+    var markers = [];
+    var edges = [];
+
+    // ===== VẼ TẤT CẢ ĐƯỜNG NỐI =====
+    function redrawEdges() {
+
+        // Xóa đường cũ
+        edges.forEach(e => map.removeLayer(e));
+        edges = [];
+
+        if (markers.length < 2) return;
+
+        for (let i = 0; i < markers.length; i++) {
+            for (let j = i + 1; j < markers.length; j++) {
+
+                let p1 = markers[i].getLatLng();
+                let p2 = markers[j].getLatLng();
+
+                let line = L.polyline([p1, p2], {
+                    color: "black",
+                    weight: 3,
+                    opacity: 0.85
+                }).addTo(map);
+
+                edges.push(line);
+            }
+        }
+    }
+
+    // ====== Hàm tạo marker + gán sự kiện xóa ======
+    function addMarker(lat, lng, name, X, Y) {
+
+        var marker = L.marker([lat, lng], { icon: startIcon }).addTo(map);
+        markers.push(marker);
+        marker.bindPopup(
+            "<b>" + name + "</b><br>" +
+            "Lat: " + lat.toFixed(6) + "<br>" +
+            "Lng: " + lng.toFixed(6) + "<br>" +
+            "X: " + X.toFixed(2) + "<br>" +
+            "Y: " + Y.toFixed(2) + "<br><br>" +
+            "<i>(Bấm vào marker để xóa)</i>"
+        );
+
+        //  Di chuột → hiện popup
+        marker.on('mouseover', function () {
+            marker.openPopup();
+        });
+
+        //  Rời chuột → đóng popup
+        marker.on('mouseout', function () {
+            marker.closePopup();
+        });
+
+        //  Click để xóa marker + gửi DELETE về C++
+        marker.on('click', function () {
+            // 1) Xoá marker khỏi bản đồ
+            map.removeLayer(marker);
+
+            // 2) Xoá khỏi danh sách marker
+            markers = markers.filter(m => m !== marker);
+
+            // 3) Vẽ lại các đường nối
+            redrawEdges();
+
+            // 4) Báo lại cho C++
+            window.chrome.webview.postMessage("DELETE|" + lat + "|" + lng);
+        });
+        redrawEdges();
+        return marker;
+    }
+
+
+    // ====== Khi click bản đồ để thêm điểm ======
+    map.on('click', function (e) {
+
+        var lat = e.latlng.lat;
+        var lng = e.latlng.lng;
+
+        // chuyển sang tọa độ chiếu (để tính Euclid)
+        var projected = map.project(e.latlng, map.getZoom());
+        var X = projected.x;
+        var Y = projected.y;
+
+        var name = prompt("Bạn muốn đặt tên cho vị trí này?", "Vị trí mới");
+        if (!name || !name.trim()) return;
+
+        // Gửi về C++
+        window.chrome.webview.postMessage(
+            name + "|" + lat + "|" + lng + "|" + X + "|" + Y
+        );
+
+        // Hiển thị marker lên map
+        addMarker(lat, lng, name, X, Y).openPopup();
+
+    });
+// vẽ đường tối ưu ( màu xanh )
+    var optimalEdges = [];
+
+    function drawOptimalPath(points) {
+
+        console.log("OPTIMAL:", points);
+
+        // xóa đường cũ
+        optimalEdges.forEach(e => map.removeLayer(e));
+        optimalEdges = [];
+
+        if (!points || points.length < 2) return;
+
+        for (let i = 0; i < points.length - 1; i++) {
+
+            let p1 = L.latLng(points[i].lat, points[i].lng);
+            let p2 = L.latLng(points[i+1].lat, points[i+1].lng);
+
+            let line = L.polyline([p1, p2], {
+                color: "blue",
+                weight: 5,
+                opacity: 0.9
+            }).addTo(map);
+
+            optimalEdges.push(line);
+        }
+    }
+    //  xóa tất cả marker và đường nối
+    function clearAll() {
+
+        // xóa marker
+        markers.forEach(m => map.removeLayer(m));
+        markers = [];
+
+        // xóa đường nối thường
+        edges.forEach(e => map.removeLayer(e));
+        edges = [];
+
+        // xóa đường nối tối ưu
+        optimalEdges.forEach(e => map.removeLayer(e));
+        optimalEdges = [];
+        window.chrome.webview.postMessage("CLEAR_ALL");
+    }
+//========================================= KHOẢNG CÁCH THẬT =================================
+    async function buildRealMatrix() {
+        if (!window.citiesJS || citiesJS.length < 2) {
+            chrome.webview.postMessage("REALMATRIX|0");
+            return;
+        }
+
+        const n = citiesJS.length;
+        const dist = Array.from({ length: n }, () => Array(n).fill(0));
+
+        const apiKey = "YOUR_API_KEY_HERE"; // thay key tại đây
+
+        for (let i = 0; i < n; i++) {
+            for (let j = i + 1; j < n; j++) {
+
+                const p1 = citiesJS[i];
+                const p2 = citiesJS[j];
+
+                const url =
+                    `https://graphhopper.com/api/1/route?point=${p1.lat},${p1.lng}` +
+                    `&point=${p2.lat},${p2.lng}&vehicle=car&locale=vi` +
+                    `&calc_points=false&key=${apiKey}`;
+
+                try {
+                    const res = await fetch(url);
+                    const json = await res.json();
+                    const d = json.paths[0].distance; // mét
+
+                    dist[i][j] = d;
+                    dist[j][i] = d;
+                }
+                catch {
+                    dist[i][j] = dist[j][i] = 1e9; // lỗi thì set thật lớn
+                }
+            }
+        }
+
+        let parts = [];
+        parts.push("REALMATRIX");
+        parts.push(String(n));
+
+        for (let i = 0; i < n; i++)
+            for (let j = 0; j < n; j++)
+                parts.push(String(dist[i][j]));
+
+        chrome.webview.postMessage(parts.join("|"));
+    }
+
+
+
+
+</script>
+
+</body>
+</html>
